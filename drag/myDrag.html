@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="gbk"/>
+		<title>Drag_Test_土豆网</title>
+
+		<link type="application/rss+xml" rel="alternate" title="土豆首页Feed" href="http://rss.tudou.com/feed?type=recommend"/>
+
+	</head>
+	<body>
+		<div id="drag" style="width: 200px; height: 100px; background: #f00;">
+			<form>
+			<input type="text" />
+			<select>
+				<option> testt</option>
+				<option> testt</option>
+				<option> testt</option>
+			</select>
+			<input type="radio"  />
+			<input type="submit"  />
+			<a href="#"> link </a>
+			</form>
+
+		</div>
+		
+		<div style=" width:20px; height: 20px; background: #00f" id="drag3"> </div>
+			
+
+		<div style=" height: 900px; background: #eee;">
+
+		</div>
+
+	
+	
+		<script src = "http://hhfu.tudouui.com/js/lib/jquery-1.7.2.js"></script>
+		<script src = "DragDrop.js"> </script>
+		<script>
+		$(function(){
+			Dragdrop({
+				target: $('#drag3')
+			});
+            Dragdrop({
+                target : $('#drag'),
+                callback : function(obj) {
+                    //console.log(obj, this);
+                    
+                    
+                }
+            });
+
+		});
+			
+
+		</script>
+	</body>
+</html>

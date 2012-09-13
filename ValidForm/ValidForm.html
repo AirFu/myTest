@@ -1,0 +1,281 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title> test</title>
+<style type="text/css">
+ul, li{
+    list-style: none;
+}
+.focusTip, .succTip,.errorTip{
+    padding: 2px 5px;
+    border:1px solid #ccc;
+    color: #666;
+}
+.succTip{
+    border-color: green;
+    color: green;
+}
+.errorTip{
+    border-color: #d00;
+    color: #d00;
+}
+
+</style>
+    </head>
+    <body>
+
+    <form id="formid" method="post" action="">
+
+        <ul>
+            <li>鐢ㄦ埛鍚嶏細<input name="username" id="username" type="text" value="" /><em id="username_tip"></em></li>
+            <li>閮ㄩ棬锛�input name="depart" id="depart" type="text" value="" /><em id="depart_tip"></em></li>
+<!--             <li>鐖卞ソ锛�label><input name="interest" type= "checkbox" value="" />鐪嬬數褰�/label>
+                <label><input name="interest" type= "checkbox" value="" />娓告垙</label>
+                <label><input name="interest" type= "checkbox" value="" />涔︾睄</label>
+            </li> -->
+            <li>瀵嗙爜锛�input name="password" id="password" type="text" /><em id="password_tip"></em></li>
+            <li>Email锛�input name="email" id="email" type="text" /><em id="email_tip"></em></li>
+            <li><input type="button" id="btnSubmit" value="鎻愪氦" /></li>
+        </ul>
+    </form>
+    <form id="formid2" method="post" action="">
+
+        <ul>
+            <li>鐢ㄦ埛鍚嶏細<input name="username" id="username2" type="text" value="" /><em id="username2_tip"></em></li>
+            <li>閮ㄩ棬锛�input name="depart" id="depart2" type="text" value="" /><em id="depart2_tip"></em></li>
+            <li>瀵嗙爜锛�input name="password" id="password2" type="text" /><em id="password2_tip"></em></li>
+            <li>涓枃锛�input name="email" id="email2" type="text" /><em id="email2_tip"></em></li>
+            <li><input type="button" id="btnSubmit2" value="鎻愪氦" /></li>
+        </ul>
+    </form>
+
+<pre>
+/**
+ *
+ 鍩烘湰鍔熻兘
+    姝ｅ垯楠岃瘉
+    闀垮害锛堟渶澶с�鏈�皬鍊硷級楠岃瘉
+    寮傛楠岃瘉
+
+鏈�铏�
+    checkbox銆乻elect銆�瀵屾枃鏈�Input姣旇緝鈥︹�
+
+鍩烘湰鐢ㄦ硶
+    new MyValidate('formid', { config:{}, fields:{} });
+
+ *  config : { // 鍩烘湰閰嶇疆
+        tips: { //楠岃瘉鎻愮ず鏂瑰紡
+            mode: 'right', //left,right,above,under锛� 鏄寚瀹氫綅缃紝璇ュ厓绱爄d鍛藉悕褰㈠紡涓猴細寰呴獙璇佸璞D_tip;
+            offset:{ //鍋忕Щ閲�瀵筶eft,right,above,under鏈夋晥锛�
+                x: 5,
+                y: 0
+            },
+            css:{
+                background: '#f00'
+            }
+        }
+    },
+
+    fields:  {
+        瀛楁ID: {
+            type: '', //鍐呯疆楠岃瘉绫诲瀷锛�
+            min: [0, '杈撳叆鐨勫�杩囩煭'],
+            max: 10,
+            rule: /.{1,3}/,
+            tips: {
+                focusTip: '璇疯緭鏈夋晥鐨勫�',
+                succTip: '杈撳叆鏈夋晥',
+				errorTip: '杈撳叆涓嶆纭�,
+				minTip: '杈撳叆鍊艰繃鐭�,
+				maxTip: '杈撳叆鍊艰繃闀�,
+				ruleTip: '鏍煎紡涓嶆纭�,
+            },
+            ajax: {
+                method: 'post',
+                params:{user : 'text', id :'none'},//瀛楁鍊间細鍛藉悕涓�val 寮傛浼犻�锛�
+                sending: '鍙戦�涓�鈥�, //鍙戦�杩囩▼涓殑鎻愮ず锛�
+                url: 'valid.php',
+                success: function(data){ //鏍规嵁data 鍋氳鍋氱殑浜嬶紱
+                    console.log('AJAX Success');
+
+                    ['楠岃瘉鍣�].feedBack('txt鎻愮ず鏂囧瓧', true); //蹇呴』鍛婅瘔楠岃瘉鍣ㄨ瀛楁鏄惁閫氳繃楠岃瘉锛屽惁鍒欏紓姝ラ獙璇佺殑瀛楁鏃犳硶閫氳繃锛�
+                }
+            }
+        }
+
+    }
+
+澶栭儴涓�埇鎯呭喌涓嬩細鐢ㄥ埌鐨勫嚱鏁�
+
+    isPass() //楠岃瘉鍣ㄤ腑寰呴獙璇佸瓧娈垫槸鍚﹂兘閫氳繃楠岃瘉锛�
+
+    submit() //楠岃瘉鍣ㄥ唴缃彁浜よ〃鍗曞姩浣滐紱绛夊緟寮傛楠岃瘉鏃讹紝瑙﹀彂浜嗘彁浜ゆ寜閽苟涓旀墍鏈夌殑寮傛楠岃瘉閫氳繃锛岃〃鍗曡嚜鍔ㄦ彁浜ゃ�
+
+ *
+ * min{鏈�皬鍊紏,max{鏈�ぇ鍊紏,reg{姝ｅ垯}
+ * 鏍煎紡涓轰簩缁存暟缁刐寰呴獙璇佺殑,閿欒鎻愮ず淇℃伅]锛屼篃鍙互鍐欎竴缁存暟缁勬垨鍗曚釜瀛楃锛屽唴缃粯璁ゆ彁绀轰俊鎭嚜鍔ㄤ細琛ラ綈锛屾帹鑽愪簩缁存暟缁刐,]锛�
+ * 鏈変笁涓閮ㄨ嚜瀹氫箟鏍峰紡focusTip, succTip,errorTip; 鍒嗗埆鏄幏寰楃劍鐐广�鎴愬姛銆佸け璐ョ殑鎻愮ず淇℃伅鏍峰紡
+ *
+*/
+</pre>
+<script type="text/javascript" src="../prototype_packed.js"></script>
+
+<script type="text/javascript" src="MyValidate.js"></script>
+<script type="text/javascript">
+
+var check = new MyValidate('formid', {
+        config : {
+            tips: {
+                mode: 'right',
+                offset:{
+                    x: 5,
+                    y: 0
+                }
+            }
+        },
+
+        fields: {
+            username: {
+                ajax: {
+                    method: 'post',
+                    params:{user : 'text', id :'none'},
+                    sending: '鍙戦�涓�鈥�,
+                    url: 'valid.php',
+                    success: function(data){
+console.log(data);
+                        check.feedBack('鐢ㄦ埛鍚嶆湁鏁�', true); //蹇呴』
+                    }
+                },
+                tips:{
+                    succTip: '鐢ㄦ埛鍚嶈緭鍏ユ垚鍔�!!'
+                },
+                min: 5,
+                max: [10, '鐢ㄦ埛鍚嶆渶澶�0浣�],
+                reg: [/^\w*$/, '璇峰瓧姣嶆垨鏁板瓧鎴栦笅鍒掔嚎鎴栨眽瀛�]
+            },
+
+            depart: {
+                ajax: {
+                    method: 'post',
+                    params:{},
+                    sending: '鍙戦�涓�鈥�,
+                    url: 'valid.php',
+                    success: function(data){
+                        console.log('depart鏈夋晥!');
+                        check.feedBack('depart鏈夋晥!', true);
+                    }
+                },
+                tips:{
+                    succTip: 'depart杈撳叆鎴愬姛!!!'
+                },
+                min: 2,
+                max: [5, 'depart鏈�ぇ5浣�]
+            },
+
+            password: {
+                tips:{
+                    focusTip: '璇疯緭鍏�-20浣嶇殑瀵嗙爜',
+                    succTip: '瀵嗙爜杈撳叆鎴愬姛'
+                },
+                min: 1,
+                max: [10, '瀵嗙爜鏈�ぇ10浣�]
+            },
+
+            email: {
+                type: ['mail', '璇疯緭鍏ラ偖绠辨牸寮�]
+            }
+        }
+
+});
+
+
+Event.observe($('btnSubmit'), 'click', function(e){
+
+        //if(check.isPass() ){
+            //console.log('Submit Form');
+       // }
+        check.submit();
+
+
+});
+
+var check2 = new MyValidate('formid2',{
+        config : {
+            tips: {
+                mode: 'under', //fllow,target
+                offset:{
+                    x: 'd',
+                    y: 10
+                },
+                css:{
+                    background: '#ff0'
+                }
+            }
+        },
+        fields: {
+            username2: {
+                ajax: {
+                    method: 'post',
+                    params:{user : 'text', id :'none'},
+                    sending: '鍙戦�涓�鈥�,
+                    url: 'valid.php',
+                    success: function(data){
+                        console.log('dusername2鏈夋晥!');
+                        check2.feedBack('username2鏈夋晥!', true);
+                    }
+                },
+                tips:{
+                    succTip: '鐢ㄦ埛鍚�杈撳叆鎴愬姛!!!'
+                },
+                min: 5,
+                max: [10, '鐢ㄦ埛鍚�鏈�ぇ110浣�]
+            },
+
+            depart2: {
+                ajax: {
+                    method: 'post',
+                    params:{},
+                    sending: '鍙戦�涓�鈥︹�',
+                    url: 'valid.php',
+                    success: function(data){
+                        console.log('depart2鏈夋晥!');
+                        check2.feedBack('depart2 鏈夋晥!', true);
+                    }
+                },
+                tips:{
+                    succTip: 'depar2t杈撳叆鎴愬姛!!!'
+                },
+                min: 2,
+                max: [5, 'depart2鏈�ぇ10浣�]
+            },
+
+            password2: {
+                tips:{
+                    focusTip: '璇疯緭鍏�-10浣嶇殑瀵嗙爜',
+                    succTip: '瀵嗙爜杈撳叆鎴愬姛'
+                },
+                min: 1,
+                max: [10, '瀵嗙爜鏈�ぇ10浣�]
+            },
+
+            email2: {
+                type: 'cn',
+                tips: {
+                    focusTip: '璇疯緭鍏ユ眽瀛�闀垮害涓嶉檺'
+                }
+            }
+        }
+
+});
+
+
+Event.observe($('btnSubmit2'), 'click', function(e){
+    if(check2.isPass()){
+        console.log('PASS-2');
+    }
+
+});
+
+</script>
+    </body>
+</html>

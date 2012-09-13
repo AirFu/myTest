@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Õ¡∂πRegTest</title>
+	</head>
+	<body>
+		<input type="text" id="ipt" />
+		<input type="button" id="test"  value="test"/>
+
+	</body>
+	
+	<script type="text/javascript">
+
+	var ipt = document.getElementById('ipt'),
+		test = document.getElementById('test'),
+		reg = /\d+?\.\d{0,1}|\d+/, 
+		val;
+		console.log( Math.round(3.44, 5));
+		test.onclick = function(){
+			
+		
+			val = ipt.value;
+			
+			
+			
+			
+			return;
+			val = parseFloat(val).toString();
+			console.log(reg.test(val), reg.exec(val)[0],  val.match(reg));
+			//console.log(val, val.length, reg.test(val));
+		}
+
+	</script>
+</html>

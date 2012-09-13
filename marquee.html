@@ -1,0 +1,120 @@
+﻿ 
+<!doctype html>
+<title>javascript无缝滚动 </title>
+<style type="text/css">
+  body{
+  padding:100px;
+  }
+  ul{margin: 0; padding:0}
+  #marquee,#marquee li {
+    margin:0;
+    padding:0;
+    list-style:none;
+	float:left;
+  }
+  #marquee {
+    position:relative;
+    height:28px;
+    width:280px;
+    overflow:hidden;
+	border:10px solid #eee;
+  }
+  #marquee a {
+    display:block;
+    padding:5px;
+    text-decoration:none;
+    white-space: nowrap;
+    color:#000;
+  }
+  #marquee a:hover{
+    background: #efefda;
+    color:#3bcdfe
+  }
+</style>
+<script src="http://js.tudouui.com/js/lib/jquery-1.4.4.min.js"></script>
+
+
+<div  id="marquee">
+	<ul style = "width:1000px;">
+	  <li>
+		<a href="08/08/1541914.html">一步步教你实现纯CSS1的柱形图</a>
+		<a href="09/02/1558998.html">javascript十个最常用的自定义函数</a>
+	  </li>
+	  <li>
+		<a href="08/08/1541914.html">一步步教你实现纯CSS的柱形图</a>
+		<a href="09/02/1558998.html">j十个最常用的自定义函数</a>
+	  </li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+
+/*
+*@note  横向滚动时需要将容器设置足够的宽度；
+@box{object} 容器
+@panel{object} 
+@speed{int} 
+@direction{string} 
+*/
+
+var Marquee = function(p){
+	var box = p.box;
+	var speed = p.speed || 25;
+	var dir	= p.direction || 'top';
+	var start, end , i, step, 
+		panel = p.panel, 
+		count = panel.length,
+		diff = (dir === 'top' || dir === 'bottom') ? $(panel[0]).height() * count : $(panel[0]).width()* count;
+	
+	panel.parent().append(panel.clone());
+	
+	switch(dir){
+	case 'top':
+		start = 0;
+		step = 1;
+		end = diff;
+		break;
+	case 'bottom':
+		step = -1;
+		start = diff;
+		end = 0;
+		break;
+	case 'left':
+		start = 0 ;
+		step = 1;
+		end = diff;
+		break;
+	case 'right':
+		step = -1;
+		start = diff;
+		end = 0;
+		break;	
+	}
+	
+	i = start;
+	
+	var rolling = function(){
+		if(  Math.abs( i) == end){
+			i = start;			
+			(dir === 'top' || dir === 'bottom') ? box.scrollTop(start) : box.scrollLeft(start);
+
+		}else{			
+			(dir === 'top' || dir === 'bottom') ? box.scrollTop(i = i + step) : box.scrollLeft(i = i + step);	
+		}
+	}
+	
+	var timer = setInterval(rolling,speed)//设置定时器
+	box.bind('mouseover',function() {clearInterval(timer)}).bind('mouseout',function() {timer=setInterval(rolling,speed)});
+	
+}
+
+var ops ={
+	box: $('#marquee'),
+	panel: $('#marquee li'),
+	speed: 50,
+	direction: 'right'
+};
+
+ Marquee(ops);
+
+</script>

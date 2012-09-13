@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+		<title>JavaScript 图片滑动切换效果</title>
+	</head>
+	<body>
+
+		<style type="text/css">
+			.container, .container img {
+				width: 280px;
+				height: 200px;
+				border: 1px solid #f00;
+			}
+		.container{
+			width: 560px;
+			overflow: hidden;
+		}
+			.container img {
+				border: 0;
+				vertical-align: top;
+			}
+			.container ul, .container li {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.container li {
+				float: left;
+			}
+			.num {
+				position: absolute;
+				right: 5px;
+				bottom: 5px;
+				font: 12px/1.5 tahoma, arial;
+				height: 18px;
+			}
+			.num li {
+				float: left;
+				color: #d94b01;
+				text-align: center;
+				line-height: 16px;
+				width: 16px;
+				height: 16px;
+				font-family: Arial;
+				font-size: 11px;
+				cursor: pointer;
+				margin-left: 3px;
+				border: 1px solid #f47500;
+				background-color: #fcf2cf;
+			}
+			.num li.on {
+				line-height: 18px;
+				width: 18px;
+				height: 18px;
+				font-size: 14px;
+				margin-top: -2px;
+				background-color: #ff9415;
+				font-weight: bold;
+				color: #FFF;
+			}
+		</style>
+
+		<div class="container" id="idContainer2">
+			<ul id="idSlider2">
+				<li>
+					<a href="#"> <img src="http://b.pic1.ajkimg.com/display/aifang/a6ec39db7c70c17095d1c1885953ee30/380x220c.jpg" /> </a>
+				</li>
+				<li>
+					<a href="#"> <img src="http://b.pic1.ajkimg.com/display/aifang/a76ff6d005fd549fff2aa269e886e649/380x220c.jpg" /> </a>
+				</li>
+				<li>
+					<a href="#"> <img src="http://c.pic1.ajkimg.com/display/aifang/f92a722c3502daa2fdb843468a4292f9/380x220c.jpg" /> </a>
+				</li>
+				<li>
+					<a href="#"> <img src="http://b.pic1.ajkimg.com/display/aifang/50e77bfb1144b8844de8cf49f92badde/380x220c.jpg" /> </a>
+				</li>
+				<li>
+					<a href="#"> <img src="http://c.pic1.ajkimg.com/display/aifang/26d6bbe264c1e9beec256edcd10b4c84/380x220c.jpg" /> </a>
+				</li>
+			</ul>
+			<ul class="num" id="idNum"></ul>
+		</div>
+		<br />
+		<div>
+			<input id="idAuto" type="button" value="停止" />
+			<input id="idPre" type="button" value="&lt;&lt;" />
+			<input id="idNext" type="button" value="&gt;&gt;" />
+		</div>
+		<script src="http://js.tudouui.com/js/lib/tuilib2_28.js"></script>
+		
+		<script src="sliderTab2.js"></script>
+		<script>
+            $(function() {
+            	
+            	var ss = sliderTab($("#idContainer2"), $("#idSlider2"), {auto:false, pause: '3000'});
+            	
+            	
+                // var len = $("#idSlider2 li").length, st = new Sliders($("#idContainer2"), $("#idSlider2"), len, {
+                    // vertical : false,
+                    // change : 280,
+                    // visibleCount: 2,
+                    // btnNex : $('#idNext'),
+                    // btnPre : $('#idPre')
+               // });
+                // document.getElementById("idAuto").onclick = function() {
+                    // if (!!st.auto) {
+                        // st.auto = false;
+                        // st.Stop();
+                        // this.value = "自动";
+                    // } else {
+                        // st.auto = true;
+                        // st.Run();
+                        // this.value = "停止";
+                    // }
+                // }
+            })
+
+		</script>
+
+	</body>
+</html>

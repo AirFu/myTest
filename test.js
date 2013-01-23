@@ -4,4 +4,6 @@ var name = 'a';
     var name = 'b';
     console.log(this, this.name);
     
+    console.log(name);
+    
 })(); 

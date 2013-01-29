@@ -1,6 +1,6 @@
 seajs.config({
   alias: {
-    'jquery': 'http://hhfu.tudouui.com/js/lib/jquery-1.7.2.js'
+    'jquery': 'http://hhfu.tudou.com/myTest/3rd/seajs/jquery.js'
   }
 });
 
@@ -8,11 +8,26 @@ seajs.config({
   // hello.sayHello();
 // });
 
-define(function(require, exports,module){
-    var h = require('hello');
+define(function(require, exports, module){
+    var $ = require('jquery');       
+    var data = require('data');
+    require('css.css');
+     
     
-    h.sayHello();
+    var btn = document.getElementById('btn');
+    var btn = $('#btn');
     
+    btn.bind('click', function(){
+        require.async('hello', function(hello){
+            hello.sayHello();
+            
+            $('.author').html(data.author);
+            $('.blog a').attr('href', data.blog);     
+            
+        });
+        
+    });
+
     
 });
 
